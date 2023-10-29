@@ -9,7 +9,6 @@ const webhook = new Webhook('https://discord.com/api/webhooks/116821791897525879
 
 // Initialize an array to store player data
 const playersArray = [];
-const i = 0;
 // Function to send a player to Discord
 function sendPlayerToDiscord(player) {
     const message = new MessageBuilder()
@@ -74,6 +73,7 @@ crawlAndRefreshData();
 // Schedule data crawl and refresh every 2 minutes
 setInterval(() => {
     crawlAndRefreshData();
+    let i = 0
     console.log(`${i}. check again`);
+    i++
 }, 1 * 60 * 1000); // 1 minutes in milliseconds
-i++;
