@@ -5,12 +5,17 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const MESSAGE_DELAY = 2000; // Delay in milliseconds (5 seconds)
 
 // Initialize a Discord webhook
-const webhook = new Webhook('https://discord.com/api/webhooks/1168278933695901857/qCtdYiqeW0Bf7r-TFExNHqZxZZjTKP_br-5zhEALJspd7fFU8q5u_FzRMWLysbbFXslT');
+const webhook = new Webhook('https://discord.com/api/webhooks/1168284486128128240/VXNjtoMgxAYNwWzTILYNtHcmx-VQ6JveWxc5PfBrFm_VuH1x4WVTW8BNgMsums-k_NK9');
 
 // Initialize an array to store player data
 const playersArray = [];
 let i = 0;
+let everyoneMentioned = false;
 // Function to send a player to Discord
+    async function mentionEveryone() {
+    webhook.send('@everyone Here is the lastest')
+    await delay(10000)
+}
 function sendPlayerToDiscord(player) {
     const message = new MessageBuilder()
         .setTitle(`${player.name}`)
@@ -21,12 +26,15 @@ function sendPlayerToDiscord(player) {
         .setURL(`https://renderz.app${player.href}`)
         .setImage(player.face)
 
+
+        if (!everyoneMentioned) {
+            mentionEveryone();
+            everyoneMentioned = true; // Set the flag to true
+        }   
+    
     webhook.send(message);
 }
-async function mentionEveryone() {
-    webhook.send('@everyone')
-    delay(10000)
-}
+
 // Function to check if a player is new and send them to Discord
 async function checkAndSendNewPlayers(newPlayers) {
     for (const player of newPlayers) {
@@ -35,9 +43,9 @@ async function checkAndSendNewPlayers(newPlayers) {
             sendPlayerToDiscord(player);
             playersArray.push(player);
             await delay(MESSAGE_DELAY);
-            mentionEveryone()
         }
     }
+    everyoneMentioned = false;
 }
 
 // Function to crawl and refresh player data
