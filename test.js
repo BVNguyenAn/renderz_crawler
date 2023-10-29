@@ -16,8 +16,10 @@ function sendPlayerToDiscord(player) {
         .setTitle(`${player.name}`)
         .addField('Overall', player.rating, true)
         .addField('Position', player.position, true)
+        .setThumbnail(player.club)
+        .setFooter(`player nation`, player.nation)
         .setURL(`https://renderz.app${player.href}`)
-        .setImage(player.image)
+        .setImage(player.face)
 
     webhook.send(message);
 }
@@ -52,7 +54,9 @@ async function crawlAndRefreshData() {
                 name: $(element).find('.name').text(),
                 rating: $(element).find('.rating').text(),
                 position: $(element).find('.position').text(),
-                image: $(element).find('.action-shot').attr('src'),
+                face: $(element).find('.action-shot').attr('src'),
+                club: $(element).find('.club').attr('src'),
+                nation: $(element).find('.nation').attr('src'),
             };
             newPlayers.push(playerInfo);
         });
@@ -70,5 +74,6 @@ crawlAndRefreshData();
 // Schedule data crawl and refresh every 2 minutes
 setInterval(() => {
     crawlAndRefreshData();
-    console.log('check again');
-}, 2 * 60 * 1000); // 1 minutes in milliseconds
+    const i = 0;
+    console.log(`${i}. check again`);
+}, 1 * 60 * 1000); // 1 minutes in milliseconds
