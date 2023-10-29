@@ -23,7 +23,10 @@ function sendPlayerToDiscord(player) {
 
     webhook.send(message);
 }
-
+async function mentionEveryone() {
+    webhook.send('@everyone')
+    delay(10000)
+}
 // Function to check if a player is new and send them to Discord
 async function checkAndSendNewPlayers(newPlayers) {
     for (const player of newPlayers) {
@@ -31,8 +34,8 @@ async function checkAndSendNewPlayers(newPlayers) {
         if (!existingPlayer) {
             sendPlayerToDiscord(player);
             playersArray.push(player);
-            // webhook.send('@everyone')
             await delay(MESSAGE_DELAY);
+            mentionEveryone()
         }
     }
 }
