@@ -5,7 +5,7 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const MESSAGE_DELAY = 2000; // Delay in milliseconds (5 seconds)
 
 // Initialize a Discord webhook
-const webhook = new Webhook('https://discord.com/api/webhooks/1168217918975258796/WxyEeGfEc7FCmJg3pInJ2je_Kc5AVw4ZKqdBcTiy21Wl__ffkMVaxR0iMtHVPwiiCyNI');
+const webhook = new Webhook('https://discord.com/api/webhooks/1168278933695901857/qCtdYiqeW0Bf7r-TFExNHqZxZZjTKP_br-5zhEALJspd7fFU8q5u_FzRMWLysbbFXslT');
 
 // Initialize an array to store player data
 const playersArray = [];
