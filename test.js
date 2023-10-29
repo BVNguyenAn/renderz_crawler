@@ -76,4 +76,5 @@ setInterval(() => {
     crawlAndRefreshData();
     const i = 0;
     console.log(`${i}. check again`);
+    i++
 }, 1 * 60 * 1000); // 1 minutes in milliseconds
